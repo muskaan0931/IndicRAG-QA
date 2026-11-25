@@ -1,0 +1,336 @@
+{
+  "protocol": "threshold fitted on dev, scored on test; positive class = answerable",
+  "dev_questions": 45,
+  "test_questions": 99,
+  "caveat": "Questions are AI-drafted and not yet human-verified; with ~30 test questions per class the numbers are indicative only.",
+  "methods": {
+    "bm25": {
+      "threshold": 5.922769,
+      "fit": {
+        "fit_n": 45,
+        "fit_f1": 0.806,
+        "fit_accuracy": 0.7111,
+        "fit_precision": 0.7297,
+        "fit_recall": 0.9,
+        "fit_split": "dev"
+      },
+      "dev": {
+        "overall": {
+          "tp": 27,
+          "fp": 10,
+          "tn": 5,
+          "fn": 3,
+          "n": 45,
+          "accuracy": 0.7111,
+          "precision": 0.7297,
+          "recall": 0.9,
+          "f1": 0.806
+        },
+        "auc": 0.7244,
+        "by_language": {
+          "English": {
+            "tp": 10,
+            "fp": 5,
+            "tn": 0,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.6667,
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8
+          },
+          "Hindi": {
+            "tp": 7,
+            "fp": 0,
+            "tn": 5,
+            "fn": 3,
+            "n": 15,
+            "accuracy": 0.8,
+            "precision": 1.0,
+            "recall": 0.7,
+            "f1": 0.8235
+          },
+          "Hinglish": {
+            "tp": 10,
+            "fp": 5,
+            "tn": 0,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.6667,
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8
+          }
+        }
+      },
+      "test": {
+        "overall": {
+          "tp": 64,
+          "fp": 20,
+          "tn": 10,
+          "fn": 5,
+          "n": 99,
+          "accuracy": 0.7475,
+          "precision": 0.7619,
+          "recall": 0.9275,
+          "f1": 0.8366
+        },
+        "auc": 0.7157,
+        "by_language": {
+          "English": {
+            "tp": 23,
+            "fp": 10,
+            "tn": 0,
+            "fn": 0,
+            "n": 33,
+            "accuracy": 0.697,
+            "precision": 0.697,
+            "recall": 1.0,
+            "f1": 0.8214
+          },
+          "Hindi": {
+            "tp": 18,
+            "fp": 1,
+            "tn": 9,
+            "fn": 5,
+            "n": 33,
+            "accuracy": 0.8182,
+            "precision": 0.9474,
+            "recall": 0.7826,
+            "f1": 0.8571
+          },
+          "Hinglish": {
+            "tp": 23,
+            "fp": 9,
+            "tn": 1,
+            "fn": 0,
+            "n": 33,
+            "accuracy": 0.7273,
+            "precision": 0.7188,
+            "recall": 1.0,
+            "f1": 0.8364
+          }
+        }
+      }
+    },
+    "pretrained": {
+      "threshold": 0.817646,
+      "fit": {
+        "fit_n": 45,
+        "fit_f1": 0.8525,
+        "fit_accuracy": 0.8,
+        "fit_precision": 0.8387,
+        "fit_recall": 0.8667,
+        "fit_split": "dev"
+      },
+      "dev": {
+        "overall": {
+          "tp": 26,
+          "fp": 5,
+          "tn": 10,
+          "fn": 4,
+          "n": 45,
+          "accuracy": 0.8,
+          "precision": 0.8387,
+          "recall": 0.8667,
+          "f1": 0.8525
+        },
+        "auc": 0.8356,
+        "by_language": {
+          "English": {
+            "tp": 10,
+            "fp": 2,
+            "tn": 3,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.8667,
+            "precision": 0.8333,
+            "recall": 1.0,
+            "f1": 0.9091
+          },
+          "Hindi": {
+            "tp": 6,
+            "fp": 0,
+            "tn": 5,
+            "fn": 4,
+            "n": 15,
+            "accuracy": 0.7333,
+            "precision": 1.0,
+            "recall": 0.6,
+            "f1": 0.75
+          },
+          "Hinglish": {
+            "tp": 10,
+            "fp": 3,
+            "tn": 2,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.8,
+            "precision": 0.7692,
+            "recall": 1.0,
+            "f1": 0.8696
+          }
+        }
+      },
+      "test": {
+        "overall": {
+          "tp": 55,
+          "fp": 11,
+          "tn": 19,
+          "fn": 14,
+          "n": 99,
+          "accuracy": 0.7475,
+          "precision": 0.8333,
+          "recall": 0.7971,
+          "f1": 0.8148
+        },
+        "auc": 0.858,
+        "by_language": {
+          "English": {
+            "tp": 23,
+            "fp": 4,
+            "tn": 6,
+            "fn": 0,
+            "n": 33,
+            "accuracy": 0.8788,
+            "precision": 0.8519,
+            "recall": 1.0,
+            "f1": 0.92
+          },
+          "Hindi": {
+            "tp": 9,
+            "fp": 1,
+            "tn": 9,
+            "fn": 14,
+            "n": 33,
+            "accuracy": 0.5455,
+            "precision": 0.9,
+            "recall": 0.3913,
+            "f1": 0.5455
+          },
+          "Hinglish": {
+            "tp": 23,
+            "fp": 6,
+            "tn": 4,
+            "fn": 0,
+            "n": 33,
+            "accuracy": 0.8182,
+            "precision": 0.7931,
+            "recall": 1.0,
+            "f1": 0.8846
+          }
+        }
+      }
+    },
+    "hybrid": {
+      "threshold": 0.031529,
+      "fit": {
+        "fit_n": 45,
+        "fit_f1": 0.8475,
+        "fit_accuracy": 0.8,
+        "fit_precision": 0.8621,
+        "fit_recall": 0.8333,
+        "fit_split": "dev"
+      },
+      "dev": {
+        "overall": {
+          "tp": 25,
+          "fp": 4,
+          "tn": 11,
+          "fn": 5,
+          "n": 45,
+          "accuracy": 0.8,
+          "precision": 0.8621,
+          "recall": 0.8333,
+          "f1": 0.8475
+        },
+        "auc": 0.7833,
+        "by_language": {
+          "English": {
+            "tp": 10,
+            "fp": 3,
+            "tn": 2,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.8,
+            "precision": 0.7692,
+            "recall": 1.0,
+            "f1": 0.8696
+          },
+          "Hindi": {
+            "tp": 5,
+            "fp": 0,
+            "tn": 5,
+            "fn": 5,
+            "n": 15,
+            "accuracy": 0.6667,
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6667
+          },
+          "Hinglish": {
+            "tp": 10,
+            "fp": 1,
+            "tn": 4,
+            "fn": 0,
+            "n": 15,
+            "accuracy": 0.9333,
+            "precision": 0.9091,
+            "recall": 1.0,
+            "f1": 0.9524
+          }
+        }
+      },
+      "test": {
+        "overall": {
+          "tp": 48,
+          "fp": 7,
+          "tn": 23,
+          "fn": 21,
+          "n": 99,
+          "accuracy": 0.7172,
+          "precision": 0.8727,
+          "recall": 0.6957,
+          "f1": 0.7742
+        },
+        "auc": 0.7949,
+        "by_language": {
+          "English": {
+            "tp": 22,
+            "fp": 4,
+            "tn": 6,
+            "fn": 1,
+            "n": 33,
+            "accuracy": 0.8485,
+            "precision": 0.8462,
+            "recall": 0.9565,
+            "f1": 0.898
+          },
+          "Hindi": {
+            "tp": 7,
+            "fp": 0,
+            "tn": 10,
+            "fn": 16,
+            "n": 33,
+            "accuracy": 0.5152,
+            "precision": 1.0,
+            "recall": 0.3043,
+            "f1": 0.4667
+          },
+          "Hinglish": {
+            "tp": 19,
+            "fp": 3,
+            "tn": 7,
+            "fn": 4,
+            "n": 33,
+            "accuracy": 0.7879,
+            "precision": 0.8636,
+            "recall": 0.8261,
+            "f1": 0.8444
+          }
+        }
+      }
+    }
+  },
+  "skipped": {}
+}

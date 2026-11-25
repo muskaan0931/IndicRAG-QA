@@ -1,0 +1,26 @@
+{
+  "evaluated_queries": 93,
+  "total_queries_loaded": 144,
+  "answerable_queries": 99,
+  "queries_with_valid_gold": 93,
+  "excluded_queries": 51,
+  "mean_reciprocal_rank": 0.5358,
+  "mean_recall@5": 0.6613,
+  "mean_recall@10": 0.7634,
+  "mean_precision@5": 0.1462,
+  "mean_precision@10": 0.0849,
+  "mean_ndcg@5": 0.5385,
+  "mean_ndcg@10": 0.5727,
+  "hit@1": 0.3871,
+  "hit@3": 0.6452,
+  "hit@5": 0.6989,
+  "hit@10": 0.8065,
+  "diagnostics": {
+    "total_queries_loaded": 144,
+    "answerable_queries": 99,
+    "queries_with_valid_gold": 93,
+    "evaluated_queries": 93,
+    "excluded_queries": 51,
+    "notes": "Evaluated 93 queries with gold passages; 51 unanswerable/ungrounded queries excluded from ranking metrics."
+  }
+}

@@ -1,0 +1,145 @@
+﻿qid,fact_id,split,language,question,answerable,gold_chunk_ids,answer_text,reviewer_ok,reviewer_notes
+A01-EN,A01,dev,English,What is the minimum attendance required to appear in the end semester examination?,True,notification_for_minimum_attendance_for_students_p1_c1;exam_manual_p28_c1,75%,Y,
+A01-HI,A01,dev,Hindi,अंतिम सेमेस्टर परीक्षा में बैठने के लिए न्यूनतम उपस्थिति कितनी आवश्यक है?,True,notification_for_minimum_attendance_for_students_p1_c1;exam_manual_p28_c1,75%,Y,
+A01-HG,A01,dev,Hinglish,End semester exam mein baithne ke liye minimum attendance kitni chahiye?,True,notification_for_minimum_attendance_for_students_p1_c1;exam_manual_p28_c1,75%,Y,
+A02-EN,A02,test,English,Which grade is awarded to a student with less than 75% attendance in a course?,True,exam_manual_p28_c1,X grade,Y,
+A02-HI,A02,test,Hindi,किसी कोर्स में 75% से कम उपस्थिति होने पर छात्र को कौन सा ग्रेड दिया जाता है?,True,exam_manual_p28_c1,X grade,Y,
+A02-HG,A02,test,Hinglish,Kisi course mein 75% se kam attendance ho toh kaunsa grade milta hai?,True,exam_manual_p28_c1,X grade,Y,
+A03-EN,A03,test,English,From which academic year does the 75% attendance rule for the end semester examination apply?,True,notification_for_minimum_attendance_for_students_p1_c1,AY 2022-23,Y,
+A03-HI,A03,test,Hindi,अंतिम सेमेस्टर परीक्षा के लिए 75% उपस्थिति का नियम किस शैक्षणिक वर्ष से लागू है?,True,notification_for_minimum_attendance_for_students_p1_c1,AY 2022-23,Y,
+A03-HG,A03,test,Hinglish,End semester exam ke liye 75% attendance ka rule kis academic year se lagu hai?,True,notification_for_minimum_attendance_for_students_p1_c1,AY 2022-23,Y,
+A04-EN,A04,dev,English,On what date was the minimum attendance notification issued?,True,notification_for_minimum_attendance_for_students_p1_c1,"08t September, 2022",Y,
+A04-HI,A04,dev,Hindi,न्यूनतम उपस्थिति की अधिसूचना किस तारीख को जारी की गई थी?,True,notification_for_minimum_attendance_for_students_p1_c1,"08t September, 2022",Y,
+A04-HG,A04,dev,Hinglish,Minimum attendance ka notification kis date ko jaari hua tha?,True,notification_for_minimum_attendance_for_students_p1_c1,"08t September, 2022",Y,
+A05-EN,A05,test,English,What is the minimum CGPA required to continue a sports scholarship?,True,scholarship_policy_2024_25_final_p7_c2,6.5 CGPA,N,Rejected: cited passage does not contain the minimum sports scholarship CGPA; gold passage mismatch.
+A05-HI,A05,test,Hindi,स्पोर्ट्स स्कॉलरशिप जारी रखने के लिए न्यूनतम CGPA कितना होना चाहिए?,True,scholarship_policy_2024_25_final_p7_c2,6.5 CGPA,N,Rejected: cited passage does not contain the minimum sports scholarship CGPA; gold passage mismatch.
+A05-HG,A05,test,Hinglish,Sports scholarship continue karne ke liye minimum CGPA kitna chahiye?,True,scholarship_policy_2024_25_final_p7_c2,6.5 CGPA,N,Rejected: cited passage does not contain the minimum sports scholarship CGPA; gold passage mismatch.
+A06-EN,A06,test,English,What minimum CGPA is required to continue the merit scholarship for B.Tech AI from the second year?,True,scholarship_policy_2024_25_final_p10_c1,8.5,N,"Rejected pending source verification: OCR text shows '85 & above' without decimal, so answer 8.5 is not unambiguously supported by the supplied passage text."
+A06-HI,A06,test,Hindi,दूसरे वर्ष से बी.टेक एआई की मेरिट स्कॉलरशिप जारी रखने के लिए न्यूनतम CGPA कितना है?,True,scholarship_policy_2024_25_final_p10_c1,8.5,N,"Rejected pending source verification: OCR text shows '85 & above' without decimal, so answer 8.5 is not unambiguously supported by the supplied passage text."
+A06-HG,A06,test,Hinglish,B.Tech AI ki merit scholarship second year se continue karne ke liye minimum CGPA kitna hai?,True,scholarship_policy_2024_25_final_p10_c1,8.5,N,"Rejected pending source verification: OCR text shows '85 & above' without decimal, so answer 8.5 is not unambiguously supported by the supplied passage text."
+A07-EN,A07,dev,English,What percentage of tuition fees is the Academic Scholarship?,True,scholarship_policy_2024_25_final_p10_c1,10% of Tuition Fees,Y,
+A07-HI,A07,dev,Hindi,एकेडमिक स्कॉलरशिप ट्यूशन फीस का कितना प्रतिशत होती है?,True,scholarship_policy_2024_25_final_p10_c1,10% of Tuition Fees,Y,
+A07-HG,A07,dev,Hinglish,Academic scholarship tuition fees ka kitna percent hoti hai?,True,scholarship_policy_2024_25_final_p10_c1,10% of Tuition Fees,Y,
+A08-EN,A08,test,English,Is a student who already has an admission scholarship eligible for the Academic Scholarship?,True,scholarship_policy_2024_25_final_p10_c1,not eligible,Y,
+A08-HI,A08,test,Hindi,क्या पहले से एडमिशन स्कॉलरशिप पाने वाला छात्र एकेडमिक स्कॉलरशिप के लिए पात्र है?,True,scholarship_policy_2024_25_final_p10_c1,not eligible,Y,
+A08-HG,A08,test,Hinglish,Kya jis student ke paas pehle se admission scholarship hai woh academic scholarship ke liye eligible hai?,True,scholarship_policy_2024_25_final_p10_c1,not eligible,Y,
+A09-EN,A09,test,English,Within how many days of the last date of the examination must a make-up examination request be submitted?,True,exam_manual_p23_c2,5 days,Y,
+A09-HI,A09,test,Hindi,परीक्षा की अंतिम तिथि के कितने दिनों के भीतर मेक-अप परीक्षा का अनुरोध जमा करना होता है?,True,exam_manual_p23_c2,5 days,Y,
+A09-HG,A09,test,Hinglish,Make-up exam ka request exam ki last date ke kitne din ke andar dena hota hai?,True,exam_manual_p23_c2,5 days,Y,
+A10-EN,A10,dev,English,Who gives the final approval for a make-up examination?,True,exam_manual_p23_c2,Vice Chancellor,Y,
+A10-HI,A10,dev,Hindi,मेक-अप परीक्षा को अंतिम मंज़ूरी कौन देता है?,True,exam_manual_p23_c2,Vice Chancellor,Y,
+A10-HG,A10,dev,Hinglish,Make-up exam ko final approval kaun deta hai?,True,exam_manual_p23_c2,Vice Chancellor,Y,
+A11-EN,A11,test,English,What happens if a student misses the make-up examination?,True,exam_manual_p23_c3;ord_rulesandreg_ug_btechf_p19_c1,no further chance,Y,
+A11-HI,A11,test,Hindi,यदि कोई छात्र मेक-अप परीक्षा भी छोड़ देता है तो क्या होता है?,True,exam_manual_p23_c3;ord_rulesandreg_ug_btechf_p19_c1,no further chance,Y,
+A11-HG,A11,test,Hinglish,Agar student make-up exam bhi miss kar de toh kya hota hai?,True,exam_manual_p23_c3;ord_rulesandreg_ug_btechf_p19_c1,no further chance,Y,
+A12-EN,A12,test,English,When is the mid-term make-up examination held?,True,exam_manual_p23_c2;exam_manual_p23_c3,between Mid Term and End Semester Examination,Y,
+A12-HI,A12,test,Hindi,मिड टर्म की मेक-अप परीक्षा कब आयोजित की जाती है?,True,exam_manual_p23_c2;exam_manual_p23_c3,between Mid Term and End Semester Examination,Y,
+A12-HG,A12,test,Hinglish,Mid term ka make-up exam kab hota hai?,True,exam_manual_p23_c2;exam_manual_p23_c3,between Mid Term and End Semester Examination,Y,
+A13-EN,A13,dev,English,How many credits is one lecture hour per week per semester worth?,True,ord_rulesandreg_ug_btechf_p16_c3,one credit,Y,
+A13-HI,A13,dev,Hindi,प्रति सप्ताह एक लेक्चर घंटे के लिए कितने क्रेडिट दिए जाते हैं?,True,ord_rulesandreg_ug_btechf_p16_c3,one credit,Y,
+A13-HG,A13,dev,Hinglish,Ek lecture hour per week ke liye kitne credit milte hain?,True,ord_rulesandreg_ug_btechf_p16_c3,one credit,Y,
+A14-EN,A14,test,English,How many credits is one laboratory hour per week assigned?,True,ord_rulesandreg_ug_btechf_p16_c3,half credit,Y,
+A14-HI,A14,test,Hindi,प्रति सप्ताह एक प्रयोगशाला घंटे के लिए कितने क्रेडिट मिलते हैं?,True,ord_rulesandreg_ug_btechf_p16_c3,half credit,Y,
+A14-HG,A14,test,Hinglish,Ek lab hour per week ko kitne credit milte hain?,True,ord_rulesandreg_ug_btechf_p16_c3,half credit,Y,
+A15-EN,A15,test,English,What is the minimum duration of the B.Tech programme?,True,ord_rulesandreg_ug_btechf_p10_c1,four years,Y,
+A15-HI,A15,test,Hindi,बी.टेक कार्यक्रम की न्यूनतम अवधि कितनी है?,True,ord_rulesandreg_ug_btechf_p10_c1,four years,Y,
+A15-HG,A15,test,Hinglish,B.Tech programme ki minimum duration kitni hoti hai?,True,ord_rulesandreg_ug_btechf_p10_c1,four years,Y,
+A16-EN,A16,dev,English,Up to how many years can the B.Tech duration be extended?,True,ord_rulesandreg_ug_btechf_p10_c1,six years,Y,
+A16-HI,A16,dev,Hindi,बी.टेक की अवधि अधिकतम कितने वर्षों तक बढ़ाई जा सकती है?,True,ord_rulesandreg_ug_btechf_p10_c1,six years,Y,
+A16-HG,A16,dev,Hinglish,B.Tech ki duration maximum kitne saal tak badhayi ja sakti hai?,True,ord_rulesandreg_ug_btechf_p10_c1,six years,Y,
+A17-EN,A17,test,English,Which electronic device is allowed inside the examination hall?,True,exam_manual_p13_c4;exam_manual_p13_c3,calculators,Y,"Supported, but answer is broad: source specifies calculators up to fx 100 and only when required as specified by examiner."
+A17-HI,A17,test,Hindi,परीक्षा कक्ष के अंदर कौन सा इलेक्ट्रॉनिक उपकरण ले जाने की अनुमति है?,True,exam_manual_p13_c4;exam_manual_p13_c3,calculators,Y,"Supported, but answer is broad: source specifies calculators up to fx 100 and only when required as specified by examiner."
+A17-HG,A17,test,Hinglish,Exam hall ke andar kaunsa electronic device le ja sakte hain?,True,exam_manual_p13_c4;exam_manual_p13_c3,calculators,Y,"Supported, but answer is broad: source specifies calculators up to fx 100 and only when required as specified by examiner."
+A18-EN,A18,dev,English,What attendance is required for the NP audit grade?,True,ord_rulesandreg_ug_btechf_p25_c2;ord_rulesandreg_ug_btechf_p25_c3,above 75%,Y,
+A18-HI,A18,dev,Hindi,ऑडिट कोर्स में NP ग्रेड के लिए कितनी उपस्थिति आवश्यक है?,True,ord_rulesandreg_ug_btechf_p25_c2;ord_rulesandreg_ug_btechf_p25_c3,above 75%,Y,
+A18-HG,A18,dev,Hinglish,Audit course mein NP grade ke liye kitni attendance chahiye?,True,ord_rulesandreg_ug_btechf_p25_c2;ord_rulesandreg_ug_btechf_p25_c3,above 75%,Y,
+A19-EN,A19,test,English,During which period can students apply for an audit course?,True,ord_rulesandreg_ug_btechf_p25_c2,first two weeks of a semester,Y,
+A19-HI,A19,test,Hindi,ऑडिट कोर्स के लिए आवेदन कब किया जा सकता है?,True,ord_rulesandreg_ug_btechf_p25_c2,first two weeks of a semester,Y,
+A19-HG,A19,test,Hinglish,Audit course ke liye apply kab kar sakte hain?,True,ord_rulesandreg_ug_btechf_p25_c2,first two weeks of a semester,Y,
+A20-EN,A20,dev,English,How often must a student apply to continue the sports scholarship?,True,scholarship_policy_2024_25_final_p7_c3,every year,Y,
+A20-HI,A20,dev,Hindi,स्पोर्ट्स स्कॉलरशिप जारी रखने के लिए छात्र को कितनी बार आवेदन करना होता है?,True,scholarship_policy_2024_25_final_p7_c3,every year,Y,
+A20-HG,A20,dev,Hinglish,Sports scholarship continue karne ke liye student ko kitni baar apply karna padta hai?,True,scholarship_policy_2024_25_final_p7_c3,every year,Y,
+A21-EN,A21,test,English,Who appoints the Controller of Examination?,True,exam_manual_p5_c1,Vice-Chancellor,Y,
+A21-HI,A21,test,Hindi,परीक्षा नियंत्रक की नियुक्ति कौन करता है?,True,exam_manual_p5_c1,Vice-Chancellor,Y,
+A21-HG,A21,test,Hinglish,Controller of Examination ko kaun appoint karta hai?,True,exam_manual_p5_c1,Vice-Chancellor,Y,
+U01-EN,U01,dev,English,What is the MBBS course fee and admission process at Bennett University?,False,,,Y,
+U01-HI,U01,dev,Hindi,बेनेट यूनिवर्सिटी में एमबीबीएस कोर्स की फीस और प्रवेश प्रक्रिया क्या है?,False,,,Y,
+U01-HG,U01,dev,Hinglish,Bennett University mein MBBS course ki fee aur admission process kya hai?,False,,,Y,
+U02-EN,U02,test,English,Who is eligible for the gold medal at convocation?,False,,,Y,
+U02-HI,U02,test,Hindi,दीक्षांत समारोह में गोल्ड मेडल के लिए कौन पात्र है?,False,,,Y,
+U02-HG,U02,test,Hinglish,Convocation mein gold medal ke liye kaun eligible hai?,False,,,Y,
+U03-EN,U03,test,English,What is the NIRF ranking of the university?,False,,,Y,
+U03-HI,U03,test,Hindi,विश्वविद्यालय की NIRF रैंकिंग क्या है?,False,,,Y,
+U03-HG,U03,test,Hinglish,University ki NIRF ranking kya hai?,False,,,Y,
+U04-EN,U04,dev,English,What is the fee for a duplicate degree certificate?,False,,,Y,
+U04-HI,U04,dev,Hindi,डुप्लिकेट डिग्री सर्टिफिकेट की फीस कितनी है?,False,,,Y,
+U04-HG,U04,dev,Hinglish,Duplicate degree certificate ki fee kitni hai?,False,,,Y,
+U05-EN,U05,test,English,What are the timings of the daily yoga classes?,False,,,Y,
+U05-HI,U05,test,Hindi,दैनिक योग कक्षाओं का समय क्या है?,False,,,Y,
+U05-HG,U05,test,Hinglish,Daily yoga classes ka timing kya hai?,False,,,Y,
+U06-EN,U06,test,English,Does the university offer a flight training programme for commercial pilot license?,False,,,Y,
+U06-HI,U06,test,Hindi,क्या विश्वविद्यालय कमर्शियल पायलट लाइसेंस के लिए उड़ान प्रशिक्षण कार्यक्रम प्रदान करता है?,False,,,Y,
+U06-HG,U06,test,Hinglish,Kya university commercial pilot license ke liye flight training program provide karti hai?,False,,,Y,
+U07-EN,U07,dev,English,When is the annual alumni meet held each year?,False,,,Y,
+U07-HI,U07,dev,Hindi,वार्षिक पूर्व छात्र सम्मेलन (एलुमनाई मीट) प्रत्येक वर्ष कब आयोजित होता है?,False,,,Y,
+U07-HG,U07,dev,Hinglish,Annual alumni meet har saal kab conduct hoti hai?,False,,,Y,
+U08-EN,U08,test,English,Is there a creche facility for the children of staff?,False,,,Y,
+U08-HI,U08,test,Hindi,क्या कर्मचारियों के बच्चों के लिए क्रेच की सुविधा है?,False,,,Y,
+U08-HG,U08,test,Hinglish,Kya staff ke bachchon ke liye creche ki suvidha hai?,False,,,Y,
+U09-EN,U09,test,English,How can I book a taxi from the campus?,False,,,Y,
+U09-HI,U09,test,Hindi,कैंपस से टैक्सी कैसे बुक करें?,False,,,Y,
+U09-HG,U09,test,Hinglish,Campus se taxi kaise book karein?,False,,,Y,
+U10-EN,U10,dev,English,Is there a seat quota for international students based on nationality?,False,,,Y,
+U10-HI,U10,dev,Hindi,क्या राष्ट्रीयता के आधार पर अंतरराष्ट्रीय छात्रों के लिए सीट कोटा है?,False,,,Y,
+U10-HG,U10,dev,Hinglish,Kya nationality ke basis par international students ke liye seat quota hai?,False,,,Y,
+A22-EN,A22,dev,English,Within how many days must a medical report be submitted if a hosteller falls sick during examinations?,True,exam_manual_p22_c3,not later than 5 days after the last date of the said examination,Y,Grounded in corpus passage.
+A22-HI,A22,dev,Hindi,यदि कोई हॉस्टलर परीक्षा के दौरान बीमार पड़ता है तो कितने दिनों के भीतर मेडिकल रिपोर्ट जमा करनी होगी?,True,exam_manual_p22_c3,not later than 5 days after the last date of the said examination,Y,Grounded in corpus passage.
+A22-HG,A22,dev,Hinglish,Agar hosteller exam ke dauran bimar pad jaye toh kitne din mein medical report submit karni hoti hai?,True,exam_manual_p22_c3,not later than 5 days after the last date of the said examination,Y,Grounded in corpus passage.
+A23-EN,A23,test,English,Are marked answer scripts of written examinations shown to students at Bennett University?,True,ord_rulesandreg_ug_btechf_p22_c2,shall be shown to the students,Y,Grounded in corpus passage.
+A23-HI,A23,test,Hindi,क्या बेनेट विश्वविद्यालय में लिखित परीक्षाओं की जांची गई उत्तर पुस्तिकाएं छात्रों को दिखाई जाती हैं?,True,ord_rulesandreg_ug_btechf_p22_c2,shall be shown to the students,Y,Grounded in corpus passage.
+A23-HG,A23,test,Hinglish,Kya Bennett University mein written exams ki checked answer sheets students ko dikhayi jaati hain?,True,ord_rulesandreg_ug_btechf_p22_c2,shall be shown to the students,Y,Grounded in corpus passage.
+A24-EN,A24,dev,English,What is the minimum number of credits a student must earn for the award of a B.Tech degree?,True,ord_rulesandreg_ug_btechf_p29_c3,minimum of 170 credits,Y,Grounded in corpus passage.
+A24-HI,A24,dev,Hindi,बी.टेक डिग्री प्राप्त करने के लिए एक छात्र को न्यूनतम कितने क्रेडिट अर्जित करने होंगे?,True,ord_rulesandreg_ug_btechf_p29_c3,minimum of 170 credits,Y,Grounded in corpus passage.
+A24-HG,A24,dev,Hinglish,B.Tech degree lene ke liye student ko minimum kitne credits earn karne padte hain?,True,ord_rulesandreg_ug_btechf_p29_c3,minimum of 170 credits,Y,Grounded in corpus passage.
+A25-EN,A25,test,English,What is the minimum CGPA required for the award of an undergraduate degree at Bennett University?,True,ord_rulesandreg_ug_btechf_p29_c3,CGPA equal to 2 or more,Y,Grounded in corpus passage.
+A25-HI,A25,test,Hindi,बेनेट विश्वविद्यालय में स्नातक की डिग्री प्राप्त करने के लिए न्यूनतम कितना सीजीपीए आवश्यक है?,True,ord_rulesandreg_ug_btechf_p29_c3,CGPA equal to 2 or more,Y,Grounded in corpus passage.
+A25-HG,A25,test,Hinglish,Bennett University mein graduation degree pane ke liye minimum kitna CGPA hona chahiye?,True,ord_rulesandreg_ug_btechf_p29_c3,CGPA equal to 2 or more,Y,Grounded in corpus passage.
+A26-EN,A26,test,English,Is there any supplementary examination conducted for academic projects?,True,exam_manual_p24_c3,"There shall be no supplementary examinations for the projects, except make-up examinations for missing the final viva",Y,Grounded in corpus passage.
+A26-HI,A26,test,Hindi,क्या शैक्षणिक परियोजनाओं (प्रोजेक्ट्स) के लिए कोई सप्लीमेंट्री परीक्षा आयोजित की जाती है?,True,exam_manual_p24_c3,"There shall be no supplementary examinations for the projects, except make-up examinations for missing the final viva",Y,Grounded in corpus passage.
+A26-HG,A26,test,Hinglish,Kya academic projects ke liye koi supplementary exam conduct hota hai?,True,exam_manual_p24_c3,"There shall be no supplementary examinations for the projects, except make-up examinations for missing the final viva",Y,Grounded in corpus passage.
+A27-EN,A27,test,English,Which students are eligible to appear in the Supplementary Examination?,True,ord_rulesandreg_ug_btechf_p21_c1,Students with ‘F’ grade (Except debarred cases either due to attendance or indulging in UFM),Y,Grounded in corpus passage.
+A27-HI,A27,test,Hindi,कौन से छात्र सप्लीमेंट्री परीक्षा में बैठने के पात्र हैं?,True,ord_rulesandreg_ug_btechf_p21_c1,Students with ‘F’ grade (Except debarred cases either due to attendance or indulging in UFM),Y,Grounded in corpus passage.
+A27-HG,A27,test,Hinglish,Kaun se students Supplementary Examination mein baithne ke eligible hote hain?,True,ord_rulesandreg_ug_btechf_p21_c1,Students with ‘F’ grade (Except debarred cases either due to attendance or indulging in UFM),Y,Grounded in corpus passage.
+A28-EN,A28,test,English,How many times in an academic session are Supplementary Examinations held?,True,ord_rulesandreg_ug_btechf_p21_c1,Twice in an Academic Session,Y,Grounded in corpus passage.
+A28-HI,A28,test,Hindi,एक शैक्षणिक सत्र में सप्लीमेंट्री परीक्षाएं कितनी बार आयोजित की जाती हैं?,True,ord_rulesandreg_ug_btechf_p21_c1,Twice in an Academic Session,Y,Grounded in corpus passage.
+A28-HG,A28,test,Hinglish,Ek academic session mein Supplementary Exams kitni baar hold kiye jaate hain?,True,ord_rulesandreg_ug_btechf_p21_c1,Twice in an Academic Session,Y,Grounded in corpus passage.
+A29-EN,A29,test,English,What happens to a student's scholarship if there is a proven disciplinary issue?,True,scholarship_policy_2024_25_final_p4_c2,The scholarship will be withdrawn for current semester and no scholarship will be offered in subsequent semesters.,Y,Grounded in corpus passage.
+A29-HI,A29,test,Hindi,यदि किसी छात्र के खिलाफ कोई अनुशासनात्मक मामला साबित होता है तो उसकी छात्रवृत्ति पर क्या प्रभाव पड़ता है?,True,scholarship_policy_2024_25_final_p4_c2,The scholarship will be withdrawn for current semester and no scholarship will be offered in subsequent semesters.,Y,Grounded in corpus passage.
+A29-HG,A29,test,Hinglish,Agar student ke khilaaf koi disciplinary issue prove ho jaye toh uski scholarship pe kya asar padega?,True,scholarship_policy_2024_25_final_p4_c2,The scholarship will be withdrawn for current semester and no scholarship will be offered in subsequent semesters.,Y,Grounded in corpus passage.
+A30-EN,A30,test,English,Which admission scholarship categories are offered by Bennett University?,True,scholarship_policy_2024_25_final_p2_c2,"Merit Scholarship, Sibling Scholarship, Single Girl Child Scholarship, Ward of Defence Personnel Scholarship, Alumni Scholarship, Sports Scholarship",Y,Grounded in corpus passage.
+A30-HI,A30,test,Hindi,बेनेट विश्वविद्यालय द्वारा प्रवेश के समय कौन सी छात्रवृत्ति श्रेणियां प्रदान की जाती हैं?,True,scholarship_policy_2024_25_final_p2_c2,"Merit Scholarship, Sibling Scholarship, Single Girl Child Scholarship, Ward of Defence Personnel Scholarship, Alumni Scholarship, Sports Scholarship",Y,Grounded in corpus passage.
+A30-HG,A30,test,Hinglish,Bennett University admission ke time kaun si scholarship categories offer karti hai?,True,scholarship_policy_2024_25_final_p2_c2,"Merit Scholarship, Sibling Scholarship, Single Girl Child Scholarship, Ward of Defence Personnel Scholarship, Alumni Scholarship, Sports Scholarship",Y,Grounded in corpus passage.
+A31-EN,A31,test,English,What action is taken for repeat or habitual unfair means (UFM) cases in the same academic year?,True,exam_manual_p18_c1,One step higher punishment than the most severe punishment awarded so far in all the UFM cases against him/her,Y,Grounded in corpus passage.
+A31-HI,A31,test,Hindi,एक ही शैक्षणिक वर्ष में दोबारा अनुचित साधन (यूएफएम) के मामलों में क्या कार्रवाई की जाती है?,True,exam_manual_p18_c1,One step higher punishment than the most severe punishment awarded so far in all the UFM cases against him/her,Y,Grounded in corpus passage.
+A31-HG,A31,test,Hinglish,Same academic year mein repeat ya habitual UFM cases aane par kya action liya jaata hai?,True,exam_manual_p18_c1,One step higher punishment than the most severe punishment awarded so far in all the UFM cases against him/her,Y,Grounded in corpus passage.
+A32-EN,A32,test,English,How are course grade boundaries decided and justified at Bennett University?,True,exam_manual_p19_c1,grade boundaries may be decided by the course coordinators,Y,Grounded in corpus passage.
+A32-HI,A32,test,Hindi,बेनेट विश्वविद्यालय में पाठ्यक्रम के ग्रेड की सीमाएं कैसे तय और उचित ठहराई जाती हैं?,True,exam_manual_p19_c1,grade boundaries may be decided by the course coordinators,Y,Grounded in corpus passage.
+A32-HG,A32,test,Hinglish,Bennett University mein course grade boundaries kaise decide aur justify hoti hain?,True,exam_manual_p19_c1,grade boundaries may be decided by the course coordinators,Y,Grounded in corpus passage.
+A33-EN,A33,test,English,How is alumni status verified for awarding the Bennett University Alumni Scholarship?,True,scholarship_policy_2024_25_final_p5_c2,Alumni Status of the interested student from Office Record,Y,Grounded in corpus passage.
+A33-HI,A33,test,Hindi,बेनेट विश्वविद्यालय एलुमनाई छात्रवृत्ति प्रदान करने के लिए पूर्व छात्र स्थिति का सत्यापन कैसे किया जाता है?,True,scholarship_policy_2024_25_final_p5_c2,Alumni Status of the interested student from Office Record,Y,Grounded in corpus passage.
+A33-HG,A33,test,Hinglish,Alumni Scholarship dene ke liye alumni status ka verification kaise kiya jaata hai?,True,scholarship_policy_2024_25_final_p5_c2,Alumni Status of the interested student from Office Record,Y,Grounded in corpus passage.
+U11-EN,U11,dev,English,What are the eligibility requirements for Bennett University's dual-degree program with Stanford University?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U11-HI,U11,dev,Hindi,स्टैनफोर्ड यूनिवर्सिटी के साथ बेनेट यूनिवर्सिटी के दोहरी डिग्री कार्यक्रम के लिए पात्रता क्या है?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U11-HG,U11,dev,Hinglish,Stanford University ke saath Bennett University ke dual-degree programme ki eligibility requirements kya hain?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U12-EN,U12,test,English,What is the daily schedule and timing of the free campus bus shuttle from Bennett University to Connaught Place?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U12-HI,U12,test,Hindi,बेनेट विश्वविद्यालय से कनॉट प्लेस के लिए मुफ्त परिसर बस शटल का दैनिक समय क्या है?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U12-HG,U12,test,Hinglish,Bennett University se Connaught Place ke liye free campus bus shuttle ka daily schedule aur timing kya hai?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U13-EN,U13,test,English,What is the university policy for undergraduate engineering students taking an unpaid gap year for startup incubation?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U13-HI,U13,test,Hindi,स्टार्टअप इनक्यूबेशन के लिए अवैतनिक गैप ईयर लेने वाले स्नातक छात्रों के लिए विश्वविद्यालय की नीति क्या है?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U13-HG,U13,test,Hinglish,Startup incubation ke liye unpaid gap year lene wale undergraduate students ke liye kya university policy hai?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U14-EN,U14,test,English,What is the annual tuition fee and admission eligibility for the MBBS medical doctor degree at Bennett University?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U14-HI,U14,test,Hindi,बेनेट विश्वविद्यालय में एमबीबीएस मेडिकल डिग्री के लिए वार्षिक शिक्षण शुल्क और प्रवेश पात्रता क्या है?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U14-HG,U14,test,Hinglish,Bennett University mein MBBS medical degree ki annual tuition fee aur admission eligibility kya hai?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U15-EN,U15,test,English,How many flying hours are required to complete the commercial pilot license training program at Bennett University?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U15-HI,U15,test,Hindi,बेनेट विश्वविद्यालय में कमर्शियल पायलट लाइसेंस प्रशिक्षण कार्यक्रम पूरा करने के लिए कितने उड़ान घंटे आवश्यक हैं?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.
+U15-HG,U15,test,Hinglish,Bennett University ke commercial pilot license training programme ko complete karne ke liye kitne flying hours chahiye?,False,,Insufficient information available in the provided documents.,Y,Unanswerable out-of-domain probe.

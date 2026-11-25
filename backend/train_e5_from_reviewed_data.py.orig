@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Fine-tune multilingual E5 using ONLY rows marked reviewer_ok=Y and resolvable gold chunks.
+This script does not imply a model has been trained; it must be run and documented.
+"""
+import csv,json
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+try:
+ from sentence_transformers import SentenceTransformer, InputExample, losses
+ from torch.utils.data import DataLoader
+except ImportError as e: raise SystemExit('Install sentence-transformers: pip install sentence-transformers') from e
+chunks={}
+with (ROOT/'data/chunks.jsonl').open(encoding='utf8') as f:
+ for line in f:
+  c=json.loads(line); chunks[c['chunk_id']]=c
+examples=[]; review=ROOT/'data/eval/questions_for_review.csv'
+with review.open(encoding='utf-8-sig') as f:
+ for row in csv.DictReader(f):
+  if row.get('reviewer_ok','').strip().upper()!='Y' or row.get('answerable','').lower()!='true':continue
+  ids=[x for x in row.get('gold_chunk_ids','').split(';') if x]
+  for cid in ids:
+   if cid in chunks:examples.append(InputExample(texts=['query: '+row['question'],'passage: '+chunks[cid]['text']]))
+if len(examples)<10:raise SystemExit(f'Need >=10 human-verified positive pairs; found {len(examples)}. Mark reviewer_ok=Y and ensure IDs exist.')
+model=SentenceTransformer('intfloat/multilingual-e5-base')
+loader=DataLoader(examples,shuffle=True,batch_size=8)
+loss=losses.MultipleNegativesRankingLoss(model)
+out=ROOT/'models'/'finetuned_e5'; out.mkdir(parents=True,exist_ok=True)
+model.fit(train_objectives=[(loader,loss)],epochs=1,warmup_steps=max(1,int(len(loader)*.1)),output_path=str(out),show_progress_bar=True)
+print('Saved fine-tuned model:',out,'from',len(examples),'reviewed pairs')

@@ -1,0 +1,7 @@
+Place the original corpus PDFs here, using exact filenames:
+- Exam-Manual.pdf
+- Notification-for-Minimum-Attendance-for-Students.pdf
+- Ord-RulesandReg-UG-BTechF.pdf
+- Scholarship-Policy-2024-25_Final.pdf
+- studentHandbookBennett.pdf
+The source PDFs were not present in the supplied ZIPs; they cannot be reconstructed from metadata alone.

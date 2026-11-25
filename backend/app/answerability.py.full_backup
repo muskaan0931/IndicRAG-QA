@@ -1,0 +1,349 @@
+"""Answerability detection: decide whether the retrieved evidence is strong enough to answer at all.
+
+Method (deliberately simple and inspectable): take the strongest retrieval signal for the question, e.g. the top-1
+cosine similarity of a dense retriever, or the top-1 BM25 score, and answer only if it reaches a threshold that was
+fitted on a development split (maximising F1 for the ANSWERABLE class).  There is one threshold per retrieval method,
+because the score types (BM25, cosine, RRF) live on different scales.
+
+Limits: the signal measures lexical or semantic closeness, not whether the passage actually contains the answer, so a
+topically related passage can pass the gate; E5 cosines are compressed into a narrow band, so the threshold is
+sensitive; and thresholds fitted on a few dozen questions are unstable.
+"""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+from app import config
+from app.evalkit import confusion
+
+THRESHOLDS_PATH = config.REPORTS_DIR / "answerability_thresholds.json"
+SIGNAL_TYPES = {"bm25": "bm25_top1", "pretrained": "cosine_top1", "hybrid": "dense_cosine_top1"}
+
+
+def evidence_signal(method: str, results: list[dict[str, Any]]) -> float | None:
+    """Strongest relevance signal in the result list, or None when it cannot be computed."""
+    if method == "bm25":
+        return float(results[0]["score"]) if results else 0.0
+    if method == "pretrained":
+        return float(results[0]["score"]) if results else None
+    if method == "hybrid":
+        dense = [r["dense_top1"] for r in results if r.get("dense_top1") is not None]
+        dense += [r["dense_score"] for r in results if r.get("dense_score") is not None]
+        return float(max(dense)) if dense else None
+    raise ValueError(f"Unknown method {method}")
+
+
+def fit_threshold(signals: list[float], answerable: list[bool]) -> dict[str, Any]:
+    """Pick the threshold t (predict ANSWERABLE iff signal >= t) that maximises F1 of the ANSWERABLE class on the
+    given data. Ties are broken by accuracy, then by the HIGHER threshold (more conservative)."""
+    if not signals or len(signals) != len(answerable):
+        raise ValueError("signals and labels must be non-empty and the same length")
+    vals = sorted(set(signals))
+    candidates = [vals[0] - 1e-6] + [(a + b) / 2 for a, b in zip(vals, vals[1:])] + [vals[-1] + 1e-6]
+    best: tuple[float, float, float] | None = None
+    for t in candidates:
+        m = confusion(answerable, [s >= t for s in signals])
+        key = (m["f1"], m["accuracy"], t)
+        if best is None or key > best:
+            best = key
+    assert best is not None
+    t = best[2]
+    fit = confusion(answerable, [s >= t for s in signals])
+    return {"threshold": round(t, 6), "fit_n": len(signals),
+            **{f"fit_{k}": fit[k] for k in ("f1", "accuracy", "precision", "recall")}}
+
+
+def auc(signals: list[float], answerable: list[bool]) -> float | None:
+    """Threshold-free ROC-AUC (probability a random answerable question outscores a random unanswerable one)."""
+    pos = [s for s, a in zip(signals, answerable) if a]
+    neg = [s for s, a in zip(signals, answerable) if not a]
+    if not pos or not neg:
+        return None
+    wins = sum((p > n) + 0.5 * (p == n) for p in pos for n in neg)
+    return round(wins / (len(pos) * len(neg)), 4)
+
+
+_cache: dict[str, Any] = {"mtime": None, "path": None, "data": {}}
+
+
+def load_thresholds(path: Path | None = None) -> dict[str, Any]:
+    path = path or THRESHOLDS_PATH
+    if not path.exists():
+        return {}
+    mtime = path.stat().st_mtime
+    if _cache["path"] != str(path) or _cache["mtime"] != mtime:
+        _cache.update(path=str(path), mtime=mtime, data=json.loads(path.read_text(encoding="utf-8")))
+    return _cache["data"]
+
+
+def assess(method: str, results: list[dict[str, Any]], thresholds: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Answerability decision for one question. Status is one of answerable / unanswerable / not_calibrated."""
+    thresholds = load_thresholds() if thresholds is None else thresholds
+    signal = evidence_signal(method, results)
+    entry = thresholds.get(method)
+    base = {"signal": None if signal is None else round(signal, 6), "signal_type": SIGNAL_TYPES[method],
+            "threshold": None if not entry else entry["threshold"]}
+    if not entry:
+        return {**base, "status": "not_calibrated",
+                "reason": f"No answerability threshold has been fitted for '{method}'. "
+                          "Run backend/evaluate_answerability.py to calibrate it; until then no question is rejected."}
+    if signal is None:
+        return {**base, "status": "unanswerable", "reason": "No usable relevance signal was produced for this question."}
+    ok = signal >= entry["threshold"]
+    return {**base, "status": "answerable" if ok else "unanswerable",
+            "reason": (f"Top evidence signal {signal:.3f} {'meets' if ok else 'is below'} the calibrated threshold "
+                       f"{entry['threshold']:.3f} ({SIGNAL_TYPES[method]}). Fitted on {entry.get('fit_n', '?')} "
+                       f"{entry.get('fit_split', 'dev')} questions; a heuristic, not a probability.")}
+"""Optional multilingual lexical expansion for English-document retrieval.
+
+For research transparency this uses a small editable dictionary, not a machine translation model.
+Dense E5 remains the intended cross-lingual baseline. Expanded query is only used for BM25/hybrid lexical leg.
+"""
+import re
+
+LEXICON = {
+ "scholarship": ["छात्रवृत्ति", "scholarship"], "eligibility": ["पात्रता", "eligible"],
+ "minimum attendance": ["न्यूनतम उपस्थिति", "attendance"], "attendance": ["उपस्थिति", "minimum attendance"],
+ "exam": ["परीक्षा", "examination"], "examination": ["परीक्षा", "exam"], "refund": ["वापसी", "refund"],
+ "fee": ["शुल्क", "fees"], "fees": ["शुल्क", "fee"], "credit": ["क्रेडिट", "credits"],
+ "credits": ["क्रेडिट", "credit"], "semester": ["सेमेस्टर", "term"], "marks": ["अंक", "marks"],
+ "cgpa": ["सीजीपीए", "grade point"], "grading": ["ग्रेड", "grade"],
+ "leave": ["छुट्टी", "absence"], "absence": ["अनुपस्थिति", "leave"],
+ "btech": ["बीटेक", "b.tech"], "student": ["छात्र", "student"], "students": ["छात्र", "student"],
+}
+
+def expand_query(query: str) -> str:
+    q=(query or "").strip(); low=q.lower(); extras=[]
+    for key, vals in LEXICON.items():
+        if key in low or key in q or any(v in q for v in vals):
+            extras.extend(v for v in vals if v.lower() not in low)
+    # Avoid over-expanded strings: add at most 6 unique tokens/phrases.
+    extras=list(dict.fromkeys(extras))[:6]
+    return q + (" " + " ".join(extras) if extras else "")
+"""Feature 2 - answerability detection.
+
+Fits one threshold per retrieval method on the DEV split, then reports accuracy / precision / recall / F1 and the
+confusion matrix on the untouched TEST split (positive class = ANSWERABLE). Writes
+  reports/answerability_thresholds.json  (read by /ask)   and   reports/answerability_eval.json
+
+Usage:  python backend/evaluate_answerability.py [--methods bm25 hybrid ...]
+"""
+import argparse
+
+from eval_common import ALL_METHODS, make_retrieve, method_status, write_json
+from app.evalkit import load_dataset
+from app.qa_eval import answerability_report, collect_signals
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--methods", nargs="+", default=ALL_METHODS, choices=ALL_METHODS)
+    a = ap.parse_args()
+    dev, test = load_dataset(split="dev"), load_dataset(split="test")
+    retrieve = make_retrieve()
+    usable, skipped = method_status(a.methods)
+    thresholds, evals = {}, {}
+    for m in usable:
+        entry, ev = answerability_report(dev, collect_signals(dev, retrieve, m), test, collect_signals(test, retrieve, m), m)
+        thresholds[m], evals[m] = entry, ev
+        t = ev["test"]["overall"]
+        print(f"{m:11} thr={entry['threshold']:.4f}  test acc={t['accuracy']:.2f} P={t['precision']:.2f} "
+              f"R={t['recall']:.2f} F1={t['f1']:.2f} AUC={ev['test']['auc']}  confusion tp/fp/tn/fn="
+              f"{t['tp']}/{t['fp']}/{t['tn']}/{t['fn']}")
+    for m, why in skipped.items():
+        print(f"{m:11} SKIPPED: {why}")
+    write_json("answerability_thresholds.json", thresholds)
+    write_json("answerability_eval.json", {
+        "protocol": "threshold fitted on dev, scored on test; positive class = answerable",
+        "dev_questions": len(dev), "test_questions": len(test),
+        "caveat": "Questions are AI-drafted and not yet human-verified; with ~30 test questions per class the "
+                  "numbers are indicative only.",
+        "methods": evals, "skipped": skipped})
+
+
+if __name__ == "__main__":
+    main()
+"""Feature 2 - answerability detection.
+
+Fits one threshold per retrieval method on the DEV split, then reports accuracy / precision / recall / F1 and the
+confusion matrix on the untouched TEST split (positive class = ANSWERABLE). Writes
+  reports/answerability_thresholds.json  (read by /ask)   and   reports/answerability_eval.json
+
+Usage:  python backend/evaluate_answerability.py [--methods bm25 hybrid ...]
+"""
+import argparse
+
+from eval_common import ALL_METHODS, make_retrieve, method_status, write_json
+from app.evalkit import load_dataset
+from app.qa_eval import answerability_report, collect_signals
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--methods", nargs="+", default=ALL_METHODS, choices=ALL_METHODS)
+    a = ap.parse_args()
+    dev, test = load_dataset(split="dev"), load_dataset(split="test")
+    retrieve = make_retrieve()
+    usable, skipped = method_status(a.methods)
+    thresholds, evals = {}, {}
+    for m in usable:
+        entry, ev = answerability_report(dev, collect_signals(dev, retrieve, m), test, collect_signals(test, retrieve, m), m)
+        thresholds[m], evals[m] = entry, ev
+        t = ev["test"]["overall"]
+        print(f"{m:11} thr={entry['threshold']:.4f}  test acc={t['accuracy']:.2f} P={t['precision']:.2f} "
+              f"R={t['recall']:.2f} F1={t['f1']:.2f} AUC={ev['test']['auc']}  confusion tp/fp/tn/fn="
+              f"{t['tp']}/{t['fp']}/{t['tn']}/{t['fn']}")
+    for m, why in skipped.items():
+        print(f"{m:11} SKIPPED: {why}")
+    write_json("answerability_thresholds.json", thresholds)
+    write_json("answerability_eval.json", {
+        "protocol": "threshold fitted on dev, scored on test; positive class = answerable",
+        "dev_questions": len(dev), "test_questions": len(test),
+        "caveat": "Questions are AI-drafted and not yet human-verified; with ~30 test questions per class the "
+                  "numbers are indicative only.",
+        "methods": evals, "skipped": skipped})
+
+
+if __name__ == "__main__":
+    main()
+"""Pure evaluation logic for features 2 (answerability), 4 (results by language) and 5 (direct LLM vs RAG).
+
+Nothing here touches the network or loads a model: callers pass in `retrieve(question, method, k)` and generator
+objects, which keeps every function unit-testable with stand-ins.
+"""
+from __future__ import annotations
+
+from collections import Counter, defaultdict
+from typing import Any, Callable, Iterable
+
+from app import answerability
+from app.evalkit import LANGUAGES, aggregate, confusion, contains_gold, mean_ci, retrieval_row, token_f1
+
+Retrieve = Callable[[str, str, int], list[dict[str, Any]]]
+RETRIEVAL_METRICS = ["hit@1", "hit@3", "hit@5", "recall@5", "recall@10", "mrr", "ndcg@10"]
+CROSS = "Cross-lingual (Hindi+Hinglish)"
+GROUPS = ["English", "Hindi", "Hinglish", CROSS, "All"]
+
+
+def groups_of(language: str) -> list[str]:
+    """English questions over an English corpus are monolingual; Hindi/Hinglish questions are cross-lingual
+    (query language differs from document language)."""
+    g = [language, "All"]
+    if language in ("Hindi", "Hinglish"):
+        g.append(CROSS)
+    return g
+
+
+# ------------------------------------------------------------------ feature 4: retrieval by language
+def retrieval_by_language(rows: list[dict[str, Any]], retrieve: Retrieve, method: str, k: int = 10) -> dict[str, Any]:
+    """Retrieval metrics (answerable questions only) per language group, with 95% bootstrap intervals."""
+    per_row: dict[str, list[dict[str, float]]] = defaultdict(list)
+    for r in rows:
+        if not r["answerable"]:
+            continue
+        ids = [x["chunk_id"] for x in retrieve(r["question"], method, k)]
+        row = retrieval_row(ids, r["gold_chunk_ids"])
+        for g in groups_of(r["language"]):
+            per_row[g].append(row)
+    return {g: aggregate(per_row[g], RETRIEVAL_METRICS) for g in GROUPS if per_row.get(g)}
+
+
+def markdown_table(results: dict[str, Any], metric: str = "hit@5") -> str:
+    """Methods x language groups table for one metric: 'mean [lo, hi] (n)'. Unavailable methods are listed as such."""
+    groups = [g for g in GROUPS if any(isinstance(v, dict) and g in v for v in results.values())]
+    lines = ["| Method | " + " | ".join(groups) + " |", "|---|" + "---|" * len(groups)]
+    for method, res in results.items():
+        if "unavailable" in res:
+            lines.append(f"| {method} | " + " | ".join("n/a" for _ in groups) + " |")
+            continue
+        cells = []
+        for g in groups:
+            m = res.get(g, {}).get(metric)
+            cells.append(f"{m['mean']:.2f} [{m['lo']:.2f}, {m['hi']:.2f}] (n={m['n']})" if m else "–")
+        lines.append(f"| {method} | " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
+# ------------------------------------------------------------------ feature 2: answerability
+def collect_signals(rows: list[dict[str, Any]], retrieve: Retrieve, method: str, k: int = 10) -> list[float | None]:
+    return [answerability.evidence_signal(method, retrieve(r["question"], method, k)) for r in rows]
+
+
+def answerability_report(dev_rows, dev_sig, test_rows, test_sig, method: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Fit the threshold on dev, report on test. Returns (threshold entry, evaluation block)."""
+    dev_pairs = [(s, r["answerable"]) for s, r in zip(dev_sig, dev_rows) if s is not None]
+    if not dev_pairs or len({a for _, a in dev_pairs}) < 2:
+        raise ValueError(f"{method}: need dev questions of both classes with a usable signal to fit a threshold")
+    entry = answerability.fit_threshold([s for s, _ in dev_pairs], [a for _, a in dev_pairs])
+    entry["fit_split"] = "dev"
+    t = entry["threshold"]
+
+    def block(rows, sig):
+        pred = [(s is not None and s >= t) for s in sig]
+        truth = [r["answerable"] for r in rows]
+        out = {"overall": confusion(truth, pred),
+               "auc": answerability.auc([s if s is not None else float("-inf") for s in sig], truth)}
+        out["by_language"] = {lang: confusion([r["answerable"] for r in rows if r["language"] == lang],
+                                              [p for p, r in zip(pred, rows) if r["language"] == lang])
+                              for lang in LANGUAGES}
+        return out
+
+    return entry, {"threshold": t, "fit": {k: v for k, v in entry.items() if k != "threshold"},
+                   "dev": block(dev_rows, dev_sig), "test": block(test_rows, test_sig)}
+
+
+# ------------------------------------------------------------------ feature 5: direct LLM vs RAG
+def classify_outcome(row: dict[str, Any], answer: str, abstained: bool) -> str:
+    """answerable   : correct | wrong (answered, gold string absent) | abstained (over-abstention)
+       unanswerable : correct_abstain | unsupported (answered although the corpus cannot answer)"""
+    if row["answerable"]:
+        if abstained:
+            return "abstained"
+        return "correct" if contains_gold(answer, row["answer_text"]) else "wrong"
+    return "correct_abstain" if abstained else "unsupported"
+
+
+def summarize_outcomes(records: Iterable[dict[str, Any]]) -> dict[str, Any]:
+    recs = list(records)
+    ans = [r for r in recs if r["answerable"]]
+    una = [r for r in recs if not r["answerable"]]
+    c = Counter(r["outcome"] for r in recs)
+
+    def rate(num: int, den: int) -> float | None:
+        return round(num / den, 4) if den else None
+
+    answered = [r for r in recs if not r["abstained"]]
+    return {
+        "n": len(recs), "n_answerable": len(ans), "n_unanswerable": len(una),
+        "outcomes": dict(c),
+        "answerable_accuracy": rate(c["correct"], len(ans)),
+        "answerable_accuracy_ci": {k: round(v, 4) for k, v in mean_ci([float(r["outcome"] == "correct") for r in ans]).items()} if ans else None,
+        "answerable_mean_token_f1": round(sum(r["f1"] for r in ans) / len(ans), 4) if ans else None,
+        "wrong_answer_rate_on_answerable": rate(c["wrong"], len(ans)),
+        "over_abstention_rate": rate(c["abstained"], len(ans)),
+        "correct_abstention_rate_on_unanswerable": rate(c["correct_abstain"], len(una)),
+        # An "unsupported answer" is an answer a reader cannot trust: wrong on an answerable question, or any
+        # answer to an unanswerable one.
+        "unsupported_answers": c["wrong"] + c["unsupported"],
+        "unsupported_rate_of_answered": rate(c["wrong"] + c["unsupported"], len(answered)),
+        # Answers that carry no verifiable citation at all (every non-abstained direct-LLM answer by construction).
+        "uncited_answers": sum(1 for r in answered if not r.get("cited")),
+        "answers_with_verifier_warnings": sum(1 for r in answered if r.get("warnings")),
+    }
+
+
+def run_system(rows: list[dict[str, Any]], answer_fn: Callable[[dict[str, Any]], dict[str, Any]]) -> list[dict[str, Any]]:
+    """answer_fn(row) -> {answer, abstained, cited, warnings}. Adds outcome and token-F1 and keeps the raw answer."""
+    out = []
+    for r in rows:
+        a = answer_fn(r)
+        out.append({"qid": r["qid"], "language": r["language"], "answerable": r["answerable"],
+                    "question": r["question"], "gold": r["answer_text"], "answer": a["answer"],
+                    "abstained": a["abstained"], "cited": a.get("cited", []), "warnings": a.get("warnings", []),
+                    "outcome": classify_outcome(r, a["answer"], a["abstained"]),
+                    "f1": token_f1(a["answer"], r["answer_text"]) if r["answerable"] and not a["abstained"] else 0.0})
+    return out
+
+

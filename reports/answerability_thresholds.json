@@ -1,0 +1,29 @@
+{
+  "bm25": {
+    "threshold": 5.922769,
+    "fit_n": 45,
+    "fit_f1": 0.806,
+    "fit_accuracy": 0.7111,
+    "fit_precision": 0.7297,
+    "fit_recall": 0.9,
+    "fit_split": "dev"
+  },
+  "pretrained": {
+    "threshold": 0.817646,
+    "fit_n": 45,
+    "fit_f1": 0.8525,
+    "fit_accuracy": 0.8,
+    "fit_precision": 0.8387,
+    "fit_recall": 0.8667,
+    "fit_split": "dev"
+  },
+  "hybrid": {
+    "threshold": 0.031529,
+    "fit_n": 45,
+    "fit_f1": 0.8475,
+    "fit_accuracy": 0.8,
+    "fit_precision": 0.8621,
+    "fit_recall": 0.8333,
+    "fit_split": "dev"
+  }
+}

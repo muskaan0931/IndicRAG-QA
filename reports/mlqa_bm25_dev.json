@@ -1,0 +1,77 @@
+{
+  "description": "MLQA passage retrieval. Corpus = unique contexts of each file; gold = the question's own paragraph.",
+  "not_measured": [
+    "answer exact match / F1",
+    "retrieval on the Bennett corpus"
+  ],
+  "results": [
+    {
+      "split": "dev",
+      "context_language": "en",
+      "question_language": "en",
+      "setting": "monolingual",
+      "method": "bm25",
+      "model": null,
+      "corpus_passages": 978,
+      "questions": 1148,
+      "recall@1": 0.7422,
+      "recall@3": 0.8493,
+      "recall@5": 0.8868,
+      "recall@10": 0.9172,
+      "mrr@10": 0.8029,
+      "ndcg@10": 0.8308,
+      "seconds": 1.2
+    },
+    {
+      "split": "dev",
+      "context_language": "hi",
+      "question_language": "hi",
+      "setting": "monolingual",
+      "method": "bm25",
+      "model": null,
+      "corpus_passages": 425,
+      "questions": 507,
+      "recall@1": 0.6075,
+      "recall@3": 0.7179,
+      "recall@5": 0.7673,
+      "recall@10": 0.8205,
+      "mrr@10": 0.6756,
+      "ndcg@10": 0.7105,
+      "seconds": 0.3
+    },
+    {
+      "split": "dev",
+      "context_language": "hi",
+      "question_language": "en",
+      "setting": "cross-lingual",
+      "method": "bm25",
+      "model": null,
+      "corpus_passages": 425,
+      "questions": 507,
+      "recall@1": 0.0789,
+      "recall@3": 0.1065,
+      "recall@5": 0.1144,
+      "recall@10": 0.1302,
+      "mrr@10": 0.0932,
+      "ndcg@10": 0.102,
+      "seconds": 0.2
+    },
+    {
+      "split": "dev",
+      "context_language": "en",
+      "question_language": "hi",
+      "setting": "cross-lingual",
+      "method": "bm25",
+      "model": null,
+      "corpus_passages": 423,
+      "questions": 507,
+      "recall@1": 0.0631,
+      "recall@3": 0.0868,
+      "recall@5": 0.1006,
+      "recall@10": 0.1026,
+      "mrr@10": 0.0765,
+      "ndcg@10": 0.0829,
+      "seconds": 0.1
+    }
+  ]
+}

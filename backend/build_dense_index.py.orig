@@ -1,0 +1,36 @@
+"""Build and persist a dense passage index for a pretrained or fine-tuned E5 model.
+
+Examples (run from the repository root, with internet access for the first model download):
+
+  # pretrained multilingual E5 -> phase4_outputs/dense_index
+  python backend/build_dense_index.py --model intfloat/multilingual-e5-base --out phase4_outputs/dense_index
+
+  # fine-tuned model -> models/finetuned_e5_index
+  python backend/build_dense_index.py --model models/finetuned_e5 --out models/finetuned_e5_index
+"""
+import argparse
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from app.retrieval.bm25 import load_chunks  # noqa: E402
+from app.retrieval.dense import DenseRetriever  # noqa: E402
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--chunks", default="data/chunks.jsonl")
+    p.add_argument("--model", default="intfloat/multilingual-e5-base")
+    p.add_argument("--out", required=True)
+    p.add_argument("--batch-size", type=int, default=16)
+    p.add_argument("--device", default=None)
+    a = p.parse_args()
+    chunks = load_chunks(a.chunks)
+    r = DenseRetriever(a.model, device=a.device)
+    emb = r.build(chunks, batch_size=a.batch_size)
+    r.save(a.out)
+    print(f"Indexed {len(chunks)} chunks with {a.model}; embedding shape {emb.shape}; saved to {a.out}")
+
+
+if __name__ == "__main__":
+    main()

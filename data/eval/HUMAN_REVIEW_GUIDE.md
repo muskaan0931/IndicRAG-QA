@@ -1,0 +1,2 @@
+# Human review protocol
+Review questions in `questions_for_review.csv` independently of generated retrieval results. Check query translation/paraphrase fidelity, answerability against the corpus, gold answer, exact chunk ID(s), and split. Mark reviewer_ok=Y only if all fields are verified. Use dev for threshold tuning; test is untouched. Do not mark a row reviewed merely because a generated answer seems plausible. Reviewer identity/date/comments may be recorded in separate review notes, avoiding personal data in public submission.

@@ -1,0 +1,9 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2
+numpy>=1.26
+# Optional, only for pretrained / fine-tuned / hybrid retrieval and the extractive generator on Hindi/Hinglish:
+sentence-transformers>=3.0
+pymupdf>=1.24
+# Fine-tuning (backend/train_e5_from_reviewed_data.py) uses a plain PyTorch loop: `datasets` and `accelerate` are NOT required.
+# torch is installed as a dependency of sentence-transformers.

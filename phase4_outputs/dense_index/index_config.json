@@ -1,0 +1,17 @@
+{
+  "built_utc": "2026-11-24T10:45:19.860153+00:00",
+  "model": "intfloat/multilingual-e5-base",
+  "model_is_local_folder": false,
+  "model_weights_sha256": {},
+  "n_chunks": 434,
+  "embedding_dim": 768,
+  "dtype": "float32",
+  "l2_normalised": true,
+  "passage_prefix": "passage: ",
+  "query_prefix": "query: ",
+  "batch_size": 16,
+  "device": "cpu",
+  "chunks_path": "data/chunks.jsonl",
+  "chunks_sha256": "8ab39924f98f1e53fba7da9f86d875aaf69c2078c140dd64321a28128a9dc77b",
+  "sentence_transformers": "6.3.0"
+}

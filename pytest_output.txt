@@ -1,0 +1,118 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.9, pytest-9.2.0, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /Users/muskansingh/Downloads/IndicRAG/IndicRAG_QA_FINAL
+plugins: anyio-4.16.0
+collecting ... collected 58 items
+
+tests/test_answerability.py::test_fit_threshold_separates_and_prefers_conservative_tie PASSED [  1%]
+tests/test_answerability.py::test_auc_values PASSED                      [  3%]
+tests/test_answerability.py::test_evidence_signal_per_method PASSED      [  5%]
+tests/test_answerability.py::test_assess_statuses PASSED                 [  6%]
+tests/test_answerability.py::test_load_thresholds_roundtrip PASSED       [  8%]
+tests/test_ask_api.py::test_generators_endpoint PASSED                   [ 10%]
+tests/test_ask_api.py::test_ask_returns_cited_extractive_answer_without_calibration PASSED [ 12%]
+tests/test_ask_api.py::test_ask_abstains_below_calibrated_threshold PASSED [ 13%]
+tests/test_ask_api.py::test_ask_extractive_abstains_when_evidence_is_off_topic PASSED [ 15%]
+tests/test_ask_api.py::test_ask_with_llm_stub_and_error_isolation PASSED [ 17%]
+tests/test_ask_api.py::test_evaluation_endpoint_reports_status PASSED    [ 18%]
+tests/test_bugs_regression.py::test_bug_a_attendance_query_consistency PASSED [ 20%]
+tests/test_bugs_regression.py::test_bug_b_answerability_abstention_agreement PASSED [ 22%]
+tests/test_bugs_regression.py::test_bug_c_finetuned_checkpoint_graceful_unavailable PASSED [ 24%]
+tests/test_bugs_regression.py::test_bug_d_and_e_batch_runs_and_evaluation_diagnostics FAILED [ 25%]
+tests/test_bugs_regression.py::test_bug_f_honest_module_status PASSED    [ 27%]
+tests/test_dense_hybrid_api.py::test_dense_search_is_cosine_ranked PASSED [ 29%]
+tests/test_dense_hybrid_api.py::test_index_roundtrip_and_corpus_mismatch_detected PASSED [ 31%]
+tests/test_dense_hybrid_api.py::test_rrf_dedupes_and_keeps_metadata PASSED [ 32%]
+tests/test_dense_hybrid_api.py::test_language_heuristic[What is the minimum attendance required for end semester exams?-English] PASSED [ 34%]
+tests/test_dense_hybrid_api.py::test_language_heuristic[\u0905\u0902\u0924\u093f\u092e \u0938\u0947\u092e\u0947\u0938\u094d\u091f\u0930 \u092a\u0930\u0940\u0915\u094d\u0937\u093e \u0926\u0947\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0928\u094d\u092f\u0942\u0928\u0924\u092e \u0909\u092a\u0938\u094d\u0925\u093f\u0924\u093f \u0915\u093f\u0924\u0928\u0940 \u0939\u094b\u0928\u0940 \u091a\u093e\u0939\u093f\u090f?-Hindi] PASSED [ 36%]
+tests/test_dense_hybrid_api.py::test_language_heuristic[Agar student end-term exam miss kar de toh kya process hai?-Hinglish] PASSED [ 37%]
+tests/test_dense_hybrid_api.py::test_language_heuristic[Sports scholarship renew karne ke liye minimum CGPA kitna chahiye?-Hinglish] PASSED [ 39%]
+tests/test_dense_hybrid_api.py::test_language_heuristic[scholarship \u0915\u0947 \u0932\u093f\u090f minimum eligibility \u0915\u094d\u092f\u093e \u0939\u0948?-Code-mixed] PASSED [ 41%]
+tests/test_dense_hybrid_api.py::test_api_contract PASSED                 [ 43%]
+tests/test_e5_finetune_pipeline.py::test_selection_uses_only_answerable_Y_with_valid_gold PASSED [ 44%]
+tests/test_e5_finetune_pipeline.py::test_selection_rejects_duplicate_qids_and_empty_gold_text PASSED [ 46%]
+tests/test_e5_finetune_pipeline.py::test_real_data_never_selects_rejected_or_unreviewed PASSED [ 48%]
+tests/test_e5_finetune_pipeline.py::test_groups_merge_shared_facts_and_gold_chunks PASSED [ 50%]
+tests/test_e5_finetune_pipeline.py::test_folds_are_leak_free_and_cover_every_question_once PASSED [ 51%]
+tests/test_e5_finetune_pipeline.py::test_leakage_detector_fires PASSED   [ 53%]
+tests/test_e5_finetune_pipeline.py::test_real_data_folds_have_no_leakage PASSED [ 55%]
+tests/test_e5_finetune_pipeline.py::test_batch_layout_masks_other_gold_but_keeps_unrelated_negatives PASSED [ 56%]
+tests/test_e5_finetune_pipeline.py::test_negative_pool_excludes_all_gold_and_junk_chunks PASSED [ 58%]
+tests/test_e5_finetune_pipeline.py::test_multi_gold_metrics PASSED       [ 60%]
+tests/test_e5_finetune_pipeline.py::test_score_questions_rejects_shape_mismatch PASSED [ 62%]
+tests/test_e5_finetune_pipeline.py::test_summary_and_paired_difference_are_group_aware PASSED [ 63%]
+tests/test_e5_finetune_pipeline.py::test_pretrained_index_is_aligned_with_corpus PASSED [ 65%]
+tests/test_e5_finetune_pipeline.py::test_cv_driver_trains_only_on_train_groups_and_scores_only_heldout PASSED [ 67%]
+tests/test_e5_finetune_pipeline.py::test_fine_tune_loop_reduces_loss_on_toy_model PASSED [ 68%]
+tests/test_eval_dataset.py::test_dataset_structure FAILED                [ 70%]
+tests/test_eval_dataset.py::test_dev_and_test_both_have_both_classes PASSED [ 72%]
+tests/test_eval_dataset.py::test_builder_reproduces_checked_in_dataset FAILED [ 74%]
+tests/test_eval_dataset.py::test_verify_dataset_runs_on_available_corpus PASSED [ 75%]
+tests/test_generation.py::test_verify_answer_flags_missing_bad_and_invented PASSED [ 77%]
+tests/test_generation.py::test_extractive_answers_with_citation_and_abstains PASSED [ 79%]
+tests/test_generation.py::test_extractive_uses_sentence_scorer_when_given PASSED [ 81%]
+tests/test_generation.py::test_llm_generator_paths PASSED                [ 82%]
+tests/test_generation.py::test_llm_prompt_contains_rules_and_passages PASSED [ 84%]
+tests/test_generation.py::test_direct_answers_are_marked_ungrounded PASSED [ 86%]
+tests/test_generation.py::test_extractive_on_corpus_attendance_question PASSED [ 87%]
+tests/test_qa_eval.py::test_text_metrics PASSED                          [ 89%]
+tests/test_qa_eval.py::test_retrieval_row_metrics PASSED                 [ 91%]
+tests/test_qa_eval.py::test_confusion_matrix PASSED                      [ 93%]
+tests/test_qa_eval.py::test_retrieval_by_language_groups_and_cross_lingual PASSED [ 94%]
+tests/test_qa_eval.py::test_answerability_report_fits_on_dev_scores_on_test PASSED [ 96%]
+tests/test_qa_eval.py::test_answerability_report_requires_both_classes PASSED [ 98%]
+tests/test_qa_eval.py::test_classify_and_summarise_outcomes PASSED       [100%]
+
+=================================== FAILURES ===================================
+____________ test_bug_d_and_e_batch_runs_and_evaluation_diagnostics ____________
+
+    def test_bug_d_and_e_batch_runs_and_evaluation_diagnostics():
+        """Bug D & E: /evaluation reports real batch run metrics and exact non-zero query counts."""
+        with TestClient(app) as client:
+            res = client.get("/evaluation").json()
+    
+        pilot = res["bm25_pilot"]
+        summary = pilot["summary"]
+        assert summary is not None
+        assert summary["evaluated_queries"] > 0
+        assert summary["excluded_queries"] > 0
+>       assert summary["total_queries_loaded"] == 93
+E       assert 144 == 93
+
+tests/test_bugs_regression.py:63: AssertionError
+____________________________ test_dataset_structure ____________________________
+
+    def test_dataset_structure():
+        rows = load_dataset()
+>       assert len(rows) == len({r["qid"] for r in rows}) == 93
+E       AssertionError: assert 144 == 93
+E        +  where 144 = len({'A01-EN', 'A01-HG', 'A01-HI', 'A02-EN', 'A02-HG', 'A02-HI', ...})
+
+tests/test_eval_dataset.py:16: AssertionError
+__________________ test_builder_reproduces_checked_in_dataset __________________
+
+tmp_path = PosixPath('/private/var/folders/h4/mkd6g7lx5gv66xps49kg01tw0000gn/T/pytest-of-muskansingh/pytest-4/test_builder_reproduces_checke0')
+
+    def test_builder_reproduces_checked_in_dataset(tmp_path):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("bq", ROOT / "data" / "eval" / "build_questions.py")
+        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+        mod.OUT = tmp_path
+        mod.main()
+>       assert (tmp_path / "questions.jsonl").read_text(encoding="utf-8") == (ROOT / "data" / "eval" / "questions.jsonl").read_text(encoding="utf-8")
+E       assert '{"qid": "A01...ed": false}\n' == '{"qid": "A01...ng hours"]}\n'
+E         
+E         - {"qid": "A01-EN", "fact_id": "A01", "split": "dev", "language": "English", "question": "What is the minimum attendance required to appear in the end semester examination?", "answerable": true, "gold_chunk_ids": ["notification_for_minimum_attendance_for_students_p1_c1", "exam_manual_p28_c1"], "answer_text": "75%"}
+E         + {"qid": "A01-EN", "fact_id": "A01", "split": "dev", "language": "English", "question": "What is the minimum attendance required to appear in the end semester examination?", "answerable": true, "gold_chunk_ids": ["notification_for_minimum_attendance_for_stude...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_eval_dataset.py:42: AssertionError
+----------------------------- Captured stdout call -----------------------------
+93 Counter({('test', True): 39, ('dev', True): 24, ('test', False): 18, ('dev', False): 12})
+=========================== short test summary info ============================
+FAILED tests/test_bugs_regression.py::test_bug_d_and_e_batch_runs_and_evaluation_diagnostics
+FAILED tests/test_eval_dataset.py::test_dataset_structure - AssertionError: a...
+FAILED tests/test_eval_dataset.py::test_builder_reproduces_checked_in_dataset
+======================== 3 failed, 55 passed in 15.37s =========================
